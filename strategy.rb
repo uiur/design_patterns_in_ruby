@@ -27,5 +27,27 @@ class IkeIkeFormatter
   end
 end
 
+# コードブロックベースのStrategy
+# インターフェースがシンプルで、メソッドが1つだけでいいときに使える
+class AnotherTextGenerator
+  attr_accessor :author, :title, :text, :formatter
+
+  def initialize(&formatter)
+    @author = 'Hoge'
+    @title = 'Fuga'
+    @text = 'Poyo'
+    @formatter = formatter
+  end
+
+  def output
+    @formatter.call(self)
+  end
+end
+
 t = TextGenerator.new(Formatter.new)
 t.output
+
+at = AnotherTextGenerator.new do |context|
+  puts "｡･ﾟ･(ﾉД`)･ﾟ･｡#{context.title}ｳﾜｧｧ-----｡ﾟ(ﾟ´Д｀ﾟ)ﾟ｡-----ﾝ!!!!"
+end
+at.output
