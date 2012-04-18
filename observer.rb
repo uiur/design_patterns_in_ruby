@@ -17,6 +17,7 @@ module Subject
     end
   end
 end
+
 class Human
   include Subject
   attr_reader :name, :age
