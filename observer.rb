@@ -1,14 +1,6 @@
-class Human
-  attr_reader :name, :age
-  def initialize(name, age)
-    @name = name
-    @age = age
+module Subject
+  def initialize
     @observers = []
-  end
-
-  def birthday!
-    @age += 1
-    notify_observers
   end
 
   def add_observer(observer)
@@ -19,11 +11,24 @@ class Human
     @observers.delete(observer)
   end
 
-  private
-  def notify_observers
+  def notify
     @observers.each do |observer|
       observer.update(self)
     end
+  end
+end
+class Human
+  include Subject
+  attr_reader :name, :age
+  def initialize(name, age)
+    super()
+    @name = name
+    @age = age
+  end
+
+  def birthday!
+    @age += 1
+    notify
   end
 end
 
