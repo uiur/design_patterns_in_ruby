@@ -1,5 +1,6 @@
 class Mafia
   attr_reader :name
+  attr_accessor :parent
   def initialize(name)
     @name = name
     @members = []
@@ -7,6 +8,7 @@ class Mafia
 
   def add_member(member)
     @members << member
+    member.parent = self
   end
 
   def power
@@ -16,6 +18,7 @@ end
 
 class Member
   attr_reader :name, :power
+  attr_accessor :parent
   def initialize(name, power)
     @name = name
     @power = power
@@ -52,3 +55,4 @@ neko.add_member(matatabi)
 neko.add_member(katsuo)
 
 puts neko.power
+puts katsuo.parent
